@@ -1,0 +1,22 @@
+{
+    "now": "2022-01-31T22:16:44.380Z",
+    "perfNow": 11657779.300000072,
+    "diagnosticCorrelation": "4be6bb19-c772-4541-b1a5-a891d6b10b4b",
+    "source": "DownloadSupportFiles",
+    "environment": {
+        "productName": "adf",
+        "buildVersion": "1.0.012722.15",
+        "environmentType": 3,
+        "resourceName": "adf-academy-int01",
+        "resourceRegion": "eastus2",
+        "resourceGroup": "RG_LUCAS_INT01",
+        "subscriptionId": "428ef97e-516a-4e08-a54a-e6e8a08aee3b",
+        "sessionId": "dRJdn",
+        "operationId": "QIYBO",
+        "gitType": "GitHub"
+    },
+    "additionalInfo": {
+        "selectedResource": "PIPE_LEVEL_HARD",
+        "selectedResourceType": "pipeline"
+    }
+}

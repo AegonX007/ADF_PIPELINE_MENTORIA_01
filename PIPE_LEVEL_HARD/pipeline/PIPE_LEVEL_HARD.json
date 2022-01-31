@@ -1,0 +1,125 @@
+{
+    "name": "PIPE_LEVEL_HARD",
+    "properties": {
+        "activities": [
+            {
+                "name": "Http To Landing",
+                "type": "Copy",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "BinarySource",
+                        "storeSettings": {
+                            "type": "HttpReadSettings",
+                            "requestMethod": "GET"
+                        },
+                        "formatSettings": {
+                            "type": "BinaryReadSettings"
+                        }
+                    },
+                    "sink": {
+                        "type": "BinarySink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        }
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "ds_binary_http_generico",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "relative_Url": "5m-Sales-Records.zip"
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "ds_binary_generico",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "file_sytem": "landing",
+                            "file_name": "5m-Sales-Records.zip"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Lading to Raw",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Http To Landing",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "BinarySource",
+                        "storeSettings": {
+                            "type": "AzureBlobFSReadSettings",
+                            "recursive": true,
+                            "deleteFilesAfterCompletion": true
+                        },
+                        "formatSettings": {
+                            "type": "BinaryReadSettings"
+                        }
+                    },
+                    "sink": {
+                        "type": "BinarySink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        }
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "ds_binary_generico",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "file_sytem": "landing",
+                            "file_name": "5m-Sales-Records.zip"
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "ds_binary_generico",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "file_sytem": {
+                                "value": "@concat('raw/', \nutcNow('yyyy'),\n'/', \nutcNow('MM'),\n'/', \nutcNow('dd'),\n'/')",
+                                "type": "Expression"
+                            },
+                            "file_name": "5m-Sales-Records.csv"
+                        }
+                    }
+                ]
+            }
+        ],
+        "folder": {
+            "name": "AVANADE/MENTORIA DATA ENG"
+        },
+        "annotations": []
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "name": "ds_binary_generico",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "LS_data_lake_mentoria",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "file_sytem": {
+                "type": "string"
+            },
+            "file_name": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "Binary",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "fileName": {
+                    "value": "@dataset().file_name",
+                    "type": "Expression"
+                },
+                "fileSystem": {
+                    "value": "@dataset().file_sytem",
+                    "type": "Expression"
+                }
+            }
+        }
+    }
+}

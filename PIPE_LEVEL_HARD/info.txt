@@ -1,0 +1,6 @@
+selected resource name:		PIPE_LEVEL_HARD
+selected resource type:		pipeline
+factory name:			adf-academy-int01
+factory location:		eastus2
+subscription id:		428ef97e-516a-4e08-a54a-e6e8a08aee3b
+time of download (UTC):		Mon, 31 Jan 2022 22:16:44 GMT

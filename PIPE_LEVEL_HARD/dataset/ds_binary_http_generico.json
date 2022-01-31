@@ -1,0 +1,25 @@
+{
+    "name": "ds_binary_http_generico",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "LS_HttpServer_Mentoria",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "relative_Url": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "Binary",
+        "typeProperties": {
+            "location": {
+                "type": "HttpServerLocation",
+                "relativeUrl": {
+                    "value": "@dataset().relative_Url",
+                    "type": "Expression"
+                }
+            }
+        }
+    }
+}
